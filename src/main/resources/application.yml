@@ -30,7 +30,7 @@ spring:
 spring:
   profiles: prod
   pid:
-    file: /data/fitness/foodcalorie/run/foodcalorie.pid
+    file: /foodcalorie/run/foodcalorie.pid
   datasource:
     url: jdbc:mysql://${DB_URI}/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: ${DB_USER_NAME}
@@ -40,7 +40,7 @@ logging:
   config: classpath:logback-prod.xml
 log:
   file:
-    path: "/data/fitness/foodcalorie/logs"
+    path: "/foodcalorie/logs"
 server:
   port: 8080
   tomcat:
@@ -49,14 +49,14 @@ server:
       encoding: UTF-8
       pattern: "%h %l %u [%t] \"%m %U %H\" %s %b %D"
       enabled: true
-    basedir: "/data/fitness/foodcalorie"
+    basedir: "/foodcalorie"
 ---
 spring:
   profiles: local
   pid:
     file: C://dev/work/foodcalorie/run/foodcalorie.pid
   datasource:
-    url: jdbc:mysql://10.10.50.101:31036/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://192.168.0.111:30268/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: byung8
     password: 1q2w3e4r5t
     driverClassName: com.mysql.cj.jdbc.Driver
