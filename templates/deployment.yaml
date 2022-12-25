@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: foodcalorie
+  name: foodcalorie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foodcalorie
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: foodcalorie
+    spec:
+      containers:
+      - image: REGISTR_URL/fitness/foodcalorie:latest
+        name: foodcalorie
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: tz-seoul
+        env:
+        - name: DB_URI
+          value: mysql:3306
+        - name: DB_USER_NAME
+          value: byung8
+        - name: DB_USER_PASSWORD
+          value: 1q2w3e4r5t
+        resources: {}
+      volumes:
+      - hostPath:
+          path: /usr/share/zoneinfo/Asia/Seoul
+          type: ""
+        name: tz-seoul
+status: {}
+---
