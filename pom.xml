@@ -121,17 +121,30 @@
                 </configuration>
             </plugin>
 
-			<plugin>
-			  <groupId>com.google.cloud.tools</groupId>
-			  <artifactId>jib-maven-plugin</artifactId>
-			  <version>1.0.0</version>
-			  <configuration>
-			    <to>
-			      <image>harbor.wbl.com/fitness/foodcalorie</image>
-			    </to>
-			  </configuration>
-			</plugin>
-        </plugins>
+			  <plugin>
+			    <groupId>com.google.cloud.tools</groupId>
+			    <artifactId>jib-maven-plugin</artifactId>
+			    <version>3.3.1</version>
+			
+			    <!-- 1. have extension classes available on Jib's runtime classpath -->
+			    <dependencies>
+			      <dependency>
+			        <groupId>com.google.cloud.tools</groupId>
+			        <artifactId>jib-layer-filter-extension-maven</artifactId>
+			        <version>0.3.0</version>
+			      </dependency>
+			    </dependencies>
+			
+			    <configuration>
+			      <pluginExtensions>
+			        <!-- 2. specify extension implementation classes to load -->
+			        <pluginExtension>
+			          <implementation>com.google.cloud.tools.jib.maven.extension.layerfilter.JibLayerFilterExtension</implementation>
+			        </pluginExtension>
+			      </pluginExtensions>
+			    </configuration>
+			  </plugin>
+          </plugins>
     </build>
 </project>
 
