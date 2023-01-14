@@ -18,7 +18,7 @@ spec:
         app: foodcalorie
     spec:
       containers:
-      - image: harbor.wbl.com/fitness/foodcalorie:BLDID230114-202149
+      - image: harbor.wbl.com/fitness/foodcalorie:BLDID230114-205421
         name: foodcalorie
         volumeMounts:
         - mountPath: /etc/localtime
