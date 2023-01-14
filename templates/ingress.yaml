@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: foodcalorie.wbl.com
+  - host: fitness.wbl.com
     http:
       paths:
       - backend:
@@ -17,6 +17,6 @@ spec:
             name: foodcalorie
             port:
               number: 8080
-        path: /
+        path: /foodcalorie
         pathType: ImplementationSpecific
 status: {}
