@@ -50,6 +50,12 @@ server:
       pattern: "%h %l %u [%t] \"%m %U %H\" %s %b %D"
       enabled: true
     basedir: "/foodcalorie"
+  servlet:
+    context-path: /foodcalorie
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 ---
 spring:
   profiles: local
@@ -75,6 +81,7 @@ server:
       enabled: true
     basedir: "C://dev/work/fitness/foodcalorie"
   servlet:
+    context-path: /foodcalorie
     encoding:
       charset: UTF-8
       enabled: true
