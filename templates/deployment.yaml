@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: foodcalorie
+  name: foodcalorie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foodcalorie
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: foodcalorie
+    spec:
+      containers:
+      - image: harbor.wbl.com/fitness/foodcalorie:BLDID00000000-000000
+        name: foodcalorie
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: tz-seoul
+        env:
+        - name: DB_URI
+          valueFrom:
+            configMapKeyRef:
+              name: fitness-cm
+              key: DB-URI
+        - name: DB_USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: fitness-sc
+              key: DB-USER-NAME
+        - name: DB_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: fitness-sc
+              key: DB-USER-PASSWORD
+        resources: {}
+      volumes:
+      - hostPath:
+          path: /usr/share/zoneinfo/Asia/Seoul
+          type: ""
+        name: tz-seoul
+status: {}
+---

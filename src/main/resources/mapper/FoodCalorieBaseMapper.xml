@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.byung8.fitness.foodcalorie.mapper.FoodCalorieBaseMapper">
+
+	<select id="findFoodCalorie" parameterType="java.lang.String" resultType="com.byung8.fitness.domain.FoodCalorieBase">
+		SELECT
+		  FDCL_ID as foodId
+		, FDCL_ENG_NM as foodEngName
+		, FDCL_NM as foodName
+		, FD_TP_ID as foodTypeId
+		, (SELECT B.CMM_CD_NM FROM TB_CMM_CD B WHERE A.FD_TP_ID=B.CMM_CD_ID) as foodTypeName
+		, FD_UNIT_ID as foodUnitId
+		, (SELECT B.FS_NM FROM TB_FS_UNIT B WHERE A.FD_UNIT_ID=B.FS_ID) as foodUnitName
+		, UNT_CL_VAL as unitCalorieVal
+		, USE_YN as useYn
+		, REG_DT as regDt
+		, UDP_DT as udpDt
+		FROM TB_FS_FDCL A
+		WHERE A.USE_YN='Y'
+		AND A.FDCL_ID = '#{value}'
+	</select>
+	
+	<select id="findByType" parameterType="java.lang.String" resultType="com.byung8.fitness.domain.FoodCalorieBase">
+		SELECT
+		  FDCL_ID as foodId
+		, FDCL_ENG_NM as foodEngName
+		, FDCL_NM as foodName
+		, FD_TP_ID as foodTypeId
+		, (SELECT B.CMM_CD_NM FROM TB_CMM_CD B WHERE A.FD_TP_ID=B.CMM_CD_ID) as foodTypeName
+		, FD_UNIT_ID as foodUnitId
+		, (SELECT B.FS_NM FROM TB_FS_UNIT B WHERE A.FD_UNIT_ID=B.FS_ID) as foodUnitName
+		, UNT_CL_VAL as unitCalorieVal
+		, USE_YN as useYn
+		, REG_DT as regDt
+		, UDP_DT as udpDt
+		FROM TB_FS_FDCL A
+		WHERE A.USE_YN='Y'
+		AND A.FD_TP_ID = '#{value}'
+	</select>
+	
+	<select id="findByName" parameterType="java.lang.String" resultType="com.byung8.fitness.domain.FoodCalorieBase">
+		SELECT
+		  FDCL_ID as foodId
+		, FDCL_ENG_NM as foodEngName
+		, FDCL_NM as foodName
+		, FD_TP_ID as foodTypeId
+		, (SELECT B.CMM_CD_NM FROM TB_CMM_CD B WHERE A.FD_TP_ID=B.CMM_CD_ID) as foodTypeName
+		, FD_UNIT_ID as foodUnitId
+		, (SELECT B.FS_NM FROM TB_FS_UNIT B WHERE A.FD_UNIT_ID=B.FS_ID) as foodUnitName
+		, UNT_CL_VAL as unitCalorieVal
+		, USE_YN as useYn
+		, REG_DT as regDt
+		, UDP_DT as udpDt
+		FROM TB_FS_FDCL A
+		WHERE A.USE_YN='Y'
+		AND A.FDCL_NM LIKE CONCAT('%','#{value}','%')
+	</select>
+	
+	<select id="findAll" resultType="com.byung8.fitness.domain.FoodCalorieBase">
+		SELECT
+		  FDCL_ID as foodId
+		, FDCL_ENG_NM as foodEngName
+		, FDCL_NM as foodName
+		, FD_TP_ID as foodTypeId
+		, (SELECT B.CMM_CD_NM FROM TB_CMM_CD B WHERE A.FD_TP_ID=B.CMM_CD_ID) as foodTypeName
+		, FD_UNIT_ID as foodUnitId
+		, (SELECT B.FS_NM FROM TB_FS_UNIT B WHERE A.FD_UNIT_ID=B.FS_ID) as foodUnitName
+		, UNT_CL_VAL as unitCalorieVal
+		, USE_YN as useYn
+		, REG_DT as regDt
+		, UDP_DT as udpDt
+		FROM TB_FS_FDCL A
+		WHERE A.USE_YN='Y'
+	</select>
+</mapper>

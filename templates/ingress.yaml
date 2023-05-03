@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  name: foodcalorie
+  namespace: fitness
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: fitness.wbl.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: foodcalorie
+            port:
+              number: 8080
+        path: /foodcalorie
+        pathType: ImplementationSpecific
+status: {}

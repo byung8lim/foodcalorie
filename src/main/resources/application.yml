@@ -1,0 +1,88 @@
+info:
+  app:
+    name: foodcalorie
+    version: 1.0.0-SNAPSHOT
+    description:  foodcalorie
+
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: metrics,health,prometheus
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.byung8.fitness.foodcalorie.mapper
+  configuration:
+    lazyLoadingEnabled: true
+    aggressiveLazyLoading: false
+    mapUnderscoreToCamelCase: true
+spring:
+  profiles:
+    active: prod
+---
+spring:
+  profiles: prod
+  pid:
+    file: /foodcalorie/run/foodcalorie.pid
+  datasource:
+    url: jdbc:mysql://${DB_URI}/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: ${DB_USER_NAME}
+    password: ${DB_USER_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
+logging:
+  config: classpath:logback-prod.xml
+log:
+  file:
+    path: "/foodcalorie/logs"
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      rotate: true      
+      encoding: UTF-8
+      pattern: "%h %l %u [%t] \"%m %U %H\" %s %b %D"
+      enabled: true
+    basedir: "/foodcalorie"
+  servlet:
+    context-path: /foodcalorie
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+---
+spring:
+  profiles: local
+  pid:
+    file: C://dev/work/foodcalorie/run/foodcalorie.pid
+  datasource:
+    url: jdbc:mysql://192.168.0.111:30268/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: byung8
+    password: 1q2w3e4r5t
+    driverClassName: com.mysql.cj.jdbc.Driver
+logging:
+  config: classpath:logback-local.xml
+log:
+  file:
+    path: "C://dev/work/fitness/foodcalorie/logs"
+server:
+  port: 8082
+  tomcat:
+    accesslog:
+      rotate: true      
+      encoding: UTF-8
+      pattern: "%h %l %u [%t] \"%m %U %H\" %s %b %D"
+      enabled: true
+    basedir: "C://dev/work/fitness/foodcalorie"
+  servlet:
+    context-path: /foodcalorie
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
