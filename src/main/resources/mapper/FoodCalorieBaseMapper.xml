@@ -18,7 +18,7 @@
 		, UDP_DT as udpDt
 		FROM TB_FS_FDCL A
 		WHERE A.USE_YN='Y'
-		AND A.FDCL_ID = '#{value}'
+		AND A.FDCL_ID = '${value}'
 	</select>
 	
 	<select id="findByType" parameterType="java.lang.String" resultType="com.byung8.fitness.domain.FoodCalorieBase">
@@ -36,7 +36,7 @@
 		, UDP_DT as udpDt
 		FROM TB_FS_FDCL A
 		WHERE A.USE_YN='Y'
-		AND A.FD_TP_ID = '#{value}'
+		AND A.FD_TP_ID = '${value}'
 	</select>
 	
 	<select id="findByName" parameterType="java.lang.String" resultType="com.byung8.fitness.domain.FoodCalorieBase">
@@ -54,7 +54,7 @@
 		, UDP_DT as udpDt
 		FROM TB_FS_FDCL A
 		WHERE A.USE_YN='Y'
-		AND A.FDCL_NM LIKE CONCAT('%','#{value}','%')
+		AND A.FDCL_NM LIKE CONCAT('%','${value}','%')
 	</select>
 	
 	<select id="findAll" resultType="com.byung8.fitness.domain.FoodCalorieBase">
